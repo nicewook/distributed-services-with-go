@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/zsh -v
 curl -X POST localhost:8080 -d '{"record":{"value":"1234"}}'
 curl -X POST localhost:8080 -d '{"record":{"value":"5678"}}'
 curl -X POST localhost:8080 -d '{"record":{"value":"90AB"}}'
