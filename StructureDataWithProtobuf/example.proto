@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package twitter;
+
+message Tweet {
+  string message = 1;
+}
+
+syntax = "proto3";
+
+import "setter.proto";
+
+message Person {
+  option (setter.all) = true;
+
+  string id = 1;
+  string name = 2;
+}
+
+message Animal {
+  string id = 1;
+  string name = 2 [(setter.one)=true];
+}
