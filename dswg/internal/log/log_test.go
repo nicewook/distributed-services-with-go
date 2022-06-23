@@ -19,6 +19,7 @@ func TestLog(t *testing.T) {
 		"init with existing segments":       testInitExisting,
 		"reader":                            testReader,
 		"truncate":                          testTruncate,
+		"make new segment":                  testNewSegment,
 	} {
 		t.Run(scenario, func(t *testing.T) {
 			dir, err := ioutil.TempDir("", "store-test")
@@ -27,6 +28,9 @@ func TestLog(t *testing.T) {
 
 			c := Config{}
 			c.Segment.MaxStoreBytes = 32
+			if scenario == "make new segment" {
+				c.Segment.MaxIndexBytes = 13 // only one offset:position pair
+			}
 			log, err := NewLog(dir, c)
 			require.NoError(t, err)
 
@@ -109,9 +113,24 @@ func testTruncate(t *testing.T, log *Log) {
 		require.NoError(t, err)
 	}
 
-	err := log.Truncate(1)
+	_, err := log.Read(0)
+	require.NoError(t, err)
+
+	err = log.Truncate(1)
 	require.NoError(t, err)
 
 	_, err = log.Read(0)
 	require.Error(t, err)
+}
+
+func testNewSegment(t *testing.T, log *Log) {
+	append := &api.Record{
+		Value: []byte("hello world"),
+	}
+	for i := 0; i < 3; i++ {
+		_, err := log.Append(append)
+		require.NoError(t, err)
+	}
+
+	require.Equal(t, 3, len(log.segments))
 }

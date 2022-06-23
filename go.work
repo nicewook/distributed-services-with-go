@@ -1,6 +1,7 @@
 go 1.18
 
 use (
-	// ./ch1-LetsGo
-	./ch2-StructureDataWithProtobuf
+	./dswg
+// ./ch1-LetsGo
+// ./ch2-StructureDataWithProtobuf
 )

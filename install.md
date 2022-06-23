@@ -26,3 +26,11 @@ Go로 컴파일하기 위한 런타임 설치
 ```
 go install google.golang.org/protobuf/...@v1.27.1
 ```
+
+## Chapter 3
+
+```
+go get -u github.com/stretchr/testify
+go get -u github.com/tysonmote/gommap
+
+```
