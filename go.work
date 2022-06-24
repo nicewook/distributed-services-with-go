@@ -5,4 +5,6 @@ use (
 // ./ch1-LetsGo
 // ./ch2-StructureDataWithProtobuf
 // ./ch3-WriteALogPacakge
+// ./ch4-ServeRequestsWithgRPC
+
 )
