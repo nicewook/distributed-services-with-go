@@ -42,3 +42,12 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
 
 ```
+
+## Chapter 5
+
+```
+go install github.com/cloudflare/cfssl/cmd/cfssl@v1.6.1
+go install github.com/cloudflare/cfssl/cmd/cfssljson@v1.6.1
+
+go get github.com/casbin/casbin@v1.9.1
+```
