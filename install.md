@@ -50,4 +50,7 @@ go install github.com/cloudflare/cfssl/cmd/cfssl@v1.6.1
 go install github.com/cloudflare/cfssl/cmd/cfssljson@v1.6.1
 
 go get github.com/casbin/casbin@v1.9.1
+
+go get github.com/grpc-ecosystem/go-grpc-middleware
+go get github.com/grpc-ecosystem/go-grpc-middleware/auth
 ```
