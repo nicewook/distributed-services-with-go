@@ -61,3 +61,9 @@ go get github.com/grpc-ecosystem/go-grpc-middleware/auth
 go get go.uber.org/zap@v1.21.0
 go get go.opencensus.io@v0.23.0
 ```
+
+## Chapter 7
+
+```
+go get github.com/hashicorp/serf@v0.9.7
+```
