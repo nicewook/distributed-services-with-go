@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/hashicorp/serf/serf"
+	"github.com/nicewook/go-dynaport"
+	. "github.com/nicewook/proglog/internal/discovery"
 	"github.com/stretchr/testify/require"
-	"github.com/travisjeffery/go-dynaport"
-	. "github.com/travisjeffery/proglog/internal/discovery"
 )
 
 func TestMembership(t *testing.T) {
@@ -33,7 +33,6 @@ func TestMembership(t *testing.T) {
 
 	require.Equal(t, fmt.Sprintf("%d", 2), <-handler.leaves)
 }
-
 
 func setupMember(t *testing.T, members []*Membership) (
 	[]*Membership, *handler,
@@ -64,7 +63,6 @@ func setupMember(t *testing.T, members []*Membership) (
 	return members, h
 }
 
-
 type handler struct {
 	joins  chan map[string]string
 	leaves chan string
@@ -86,4 +84,3 @@ func (h *handler) Leave(id string) error {
 	}
 	return nil
 }
-
