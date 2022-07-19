@@ -66,4 +66,5 @@ go get go.opencensus.io@v0.23.0
 
 ```
 go get github.com/hashicorp/serf@v0.9.7
+go get github.com/travisjeffery/go-dynaport@v1.0.0
 ```
