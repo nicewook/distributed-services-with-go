@@ -19,6 +19,16 @@ echo 'export PATH="$PATH:/usr/local/protobuf/bin"' >> ~/.zshenv
 protoc --version
 ```
 
+```zsh
+# root issue - so change it to ~
+wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-linux-x86_64.zip
+unzip protoc-3.19.4-linux-x86_64.zip -d ~/.local/protobuf
+rm ./protoc-3.19.4-linux-x86_64.zip
+chmod +x ~/.local/protobuf/bin/protoc
+echo 'export PATH="$PATH:<homedir>/.local/protobuf/bin"' >> ~/.zshenv
+protoc --version
+```
+
 ### protobuf runtime
 
 Go로 컴파일하기 위한 런타임 설치 
@@ -67,4 +77,11 @@ go get go.opencensus.io@v0.23.0
 ```
 go get github.com/hashicorp/serf@v0.9.7
 go get github.com/travisjeffery/go-dynaport@v1.0.0
+```
+
+## Chapter 8
+
+```
+go get github.com/hashicorp/raft@v1.3.6
+go mod edit -replace github.com/hashicorp/raft-boltdb=github.com/travisjeffery/raft-boltdb@v1.0.0
 ```
