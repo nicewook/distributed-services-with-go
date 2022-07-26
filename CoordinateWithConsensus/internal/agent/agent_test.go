@@ -57,8 +57,8 @@ func TestAgent(t *testing.T) {
 		}
 
 		agent, err := agent.New(agent.Config{
-			NodeName: fmt.Sprintf("%d", i),
-			Bootstrap: i == 0,
+			NodeName:        fmt.Sprintf("%d", i),
+			Bootstrap:       i == 0,
 			StartJoinAddrs:  startJoinAddrs,
 			BindAddr:        bindAddr,
 			RPCPort:         rpcPort,

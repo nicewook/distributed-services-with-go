@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"go.uber.org/zap"
 	"github.com/hashicorp/raft"
 	"github.com/soheilhy/cmux"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
@@ -36,7 +36,7 @@ type Config struct {
 	StartJoinAddrs []string
 	ACLModelFile   string
 	ACLPolicyFile  string
-	Bootstrap bool
+	Bootstrap      bool
 }
 
 func (c Config) RPCAddr() (string, error) {
@@ -60,7 +60,6 @@ type Agent struct {
 	shutdownLock sync.Mutex
 }
 
-
 func New(config Config) (*Agent, error) {
 	a := &Agent{
 		Config:    config,
@@ -71,7 +70,7 @@ func New(config Config) (*Agent, error) {
 		return nil, err
 	}
 	zap.ReplaceGlobals(logger)
-	setup := []func() error {
+	setup := []func() error{
 		a.setupLogger,
 		a.setupMux,
 		a.setupLog,
@@ -108,7 +107,6 @@ func (a *Agent) setupMux() error {
 	a.mux = cmux.New(ln)
 	return nil
 }
-
 
 func (a *Agent) setupLog() error {
 	raftLn := a.mux.Match(func(reader io.Reader) bool {
@@ -168,7 +166,6 @@ func (a *Agent) setupServer() error {
 	return err
 }
 
-
 func (a *Agent) setupMembership() error {
 	rpcAddr, err := a.Config.RPCAddr()
 	if err != nil {
@@ -185,7 +182,6 @@ func (a *Agent) setupMembership() error {
 	return err
 }
 
-
 func (a *Agent) serve() error {
 	if err := a.mux.Serve(); err != nil {
 		_ = a.Shutdown()
@@ -193,7 +189,6 @@ func (a *Agent) serve() error {
 	}
 	return nil
 }
-
 
 func (a *Agent) Shutdown() error {
 	a.shutdownLock.Lock()

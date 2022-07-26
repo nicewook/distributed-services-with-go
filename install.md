@@ -78,4 +78,5 @@ go get github.com/travisjeffery/go-dynaport@v1.0.0
 ```
 go get github.com/hashicorp/raft@v1.3.6
 go mod edit -replace github.com/hashicorp/raft-boltdb=github.com/travisjeffery/raft-boltdb@v1.0.0
+go get -u github.com/soheilhy/cmux
 ```
