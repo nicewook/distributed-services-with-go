@@ -19,9 +19,10 @@ import (
 )
 
 type DistributedLog struct {
-	config Config
-	log    *Log
-	raft   *raft.Raft
+	config  Config
+	log     *Log
+	raftLog *logStore // nicewook. logStore 역시 Close 해주어야 한다
+	raft    *raft.Raft
 }
 
 func NewDistributedLog(dataDir string, config Config) (*DistributedLog, error) {
@@ -56,7 +57,8 @@ func (l *DistributedLog) setupRaft(dataDir string) error {
 	}
 	logConfig := l.config
 	logConfig.Segment.InitialOffset = 1
-	logStore, err := newLogStore(logDir, logConfig)
+	var err error
+	l.raftLog, err = newLogStore(logDir, logConfig) // nicewook. logStore 역시 Close 해주어야 한다
 	if err != nil {
 		return err
 	}
@@ -105,7 +107,7 @@ func (l *DistributedLog) setupRaft(dataDir string) error {
 	l.raft, err = raft.NewRaft(
 		config,
 		fsm,
-		logStore,
+		l.raftLog, // nicewook. logStore 역시 Close 해주어야 한다
 		stableStore,
 		snapshotStore,
 		transport,
@@ -114,7 +116,7 @@ func (l *DistributedLog) setupRaft(dataDir string) error {
 		return err
 	}
 	hasState, err := raft.HasExistingState(
-		logStore,
+		l.raftLog,
 		stableStore,
 		snapshotStore,
 	)
@@ -228,6 +230,9 @@ func (l *DistributedLog) WaitForLeader(timeout time.Duration) error {
 func (l *DistributedLog) Close() error {
 	f := l.raft.Shutdown()
 	if err := f.Error(); err != nil {
+		return err
+	}
+	if err := l.raftLog.Log.Close(); err != nil {
 		return err
 	}
 	return l.log.Close()
