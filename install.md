@@ -10,22 +10,16 @@ Install Go:
 
 ### protoc
 
-```zsh
-wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-linux-x86_64.zip
-sudo unzip protoc-3.19.4-linux-x86_64.zip -d /usr/local/protobuf
-rm ./protoc-3.19.4-linux-x86_64.zip
-sudo chmod +x /usr/local/protobuf/bin/protoc
-echo 'export PATH="$PATH:/usr/local/protobuf/bin"' >> ~/.zshenv
-protoc --version
-```
+- reference: https://grpc.io/docs/protoc-installation/
 
 ```zsh
 # root issue - so change it to ~
 wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-linux-x86_64.zip
-unzip protoc-3.19.4-linux-x86_64.zip -d ~/.local/protobuf
+mkdir -p $HOME/.local/protobuf
+unzip protoc-3.19.4-linux-x86_64.zip -d $HOME/.local/protobuf
 rm ./protoc-3.19.4-linux-x86_64.zip
-chmod +x ~/.local/protobuf/bin/protoc
-echo 'export PATH="$PATH:<homedir>/.local/protobuf/bin"' >> ~/.zshenv
+chmod +x $HOME/.local/protobuf/bin/protoc
+echo 'export PATH="$PATH:$HOME/.local/protobuf/bin"' >> ~/.zshenv
 protoc --version
 ```
 
