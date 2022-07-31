@@ -2,7 +2,7 @@
 image:
   repository: github.com/nicewook/proglog
   tag: 0.0.1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 serfPort: 8401
 rpcPort: 8400
 replicas: 3

@@ -1,6 +1,8 @@
-# Install tools
+# Install tools/packages
 
-Install tools on WSL2
+윈도우 WSL2 환경에서 실습을 하였으며
+
+각 장에서 필요한 툴과 패키지들의 설치를 정리해 두었다. 
 
 ## Chapter 1
 
@@ -82,7 +84,10 @@ go get -u github.com/soheilhy/cmux
 
 ## Chapter 10
 
-kubectl 설치 및 실행할 수 있도록 설정. 
+### kubectl
+
+kubectl 설치 및 실행할 수 있도록 설정
+
 2장에서와 마찬가지로 ~/.local에 설치함
 
 ```
@@ -105,4 +110,17 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 ```
 
-helm 설치 프로세스 정리 
+### helm 설치 프로세스 정리(TODO)
+
+## Chapter 11
+
+### gcloud SDK 설치
+```
+wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-383.0.1-linux-x86_64.tar.gz 
+tar -zxvf google-cloud-cli-383.0.1-linux-x86_64.tar.gz  -C ~/
+~/google-cloud-sdk/install.sh
+source ~/.zshrc
+gcloud --version
+rm -rf google-cloud-cli-383.0.1-linux-x86_64.tar.gz 
+```
+### 기타 실습 정리하기(TODO)
