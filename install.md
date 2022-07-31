@@ -99,3 +99,10 @@ go install sigs.k8s.io/kind@v0.12.0
 go get github.com/spf13/cobra
 go get github.com/spf13/viper
 ```
+
+```
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+```
+
+helm 설치 프로세스 정리 

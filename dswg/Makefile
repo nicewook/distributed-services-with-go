@@ -70,3 +70,7 @@ TAG ?= 0.0.1
 
 build-docker:
 	docker build -t github.com/nicewook/proglog:$(TAG) .
+
+load-docker:
+	kind load docker-image github.com/nicewook/proglog:$(TAG) 
+

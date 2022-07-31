@@ -28,13 +28,11 @@ import (
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
-
 type Config struct {
 	CommitLog   CommitLog
 	Authorizer  Authorizer
 	GetServerer GetServerer
 }
-
 
 const (
 	objectWildcard = "*"
@@ -115,7 +113,6 @@ func NewGRPCServer(config *Config, grpcOpts ...grpc.ServerOption) (
 	api.RegisterLogServer(gsrv, srv)
 	return gsrv, nil
 }
-
 
 func (s *grpcServer) Produce(ctx context.Context, req *api.ProduceRequest) (
 	*api.ProduceResponse, error) {
@@ -204,7 +201,6 @@ func (s *grpcServer) GetServers(
 type GetServerer interface {
 	GetServers() ([]*api.Server, error)
 }
-
 
 type CommitLog interface {
 	Append(*api.Record) (uint64, error)

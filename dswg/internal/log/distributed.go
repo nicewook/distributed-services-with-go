@@ -116,7 +116,7 @@ func (l *DistributedLog) setupRaft(dataDir string) error {
 		return err
 	}
 	hasState, err := raft.HasExistingState(
-		l.raftLog,
+		l.raftLog, // nicewook. logStore 역시 Close 해주어야 한다
 		stableStore,
 		snapshotStore,
 	)
@@ -127,7 +127,7 @@ func (l *DistributedLog) setupRaft(dataDir string) error {
 		config := raft.Configuration{
 			Servers: []raft.Server{{
 				ID:      config.LocalID,
-				Address: transport.LocalAddr(),
+				Address: raft.ServerAddress(l.config.Raft.BindAddr),
 			}},
 		}
 		err = l.raft.BootstrapCluster(config).Error()
@@ -232,7 +232,7 @@ func (l *DistributedLog) Close() error {
 	if err := f.Error(); err != nil {
 		return err
 	}
-	if err := l.raftLog.Log.Close(); err != nil {
+	if err := l.raftLog.Log.Close(); err != nil { // nicewook. logStore 역시 Close 해주어야 한다
 		return err
 	}
 	return l.log.Close()

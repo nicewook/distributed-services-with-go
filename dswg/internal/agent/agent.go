@@ -96,10 +96,7 @@ func (a *Agent) setupLogger() error {
 }
 
 func (a *Agent) setupMux() error {
-	rpcAddr := fmt.Sprintf(
-		":%d",
-		a.Config.RPCPort,
-	)
+	rpcAddr := fmt.Sprintf(":%d", a.Config.RPCPort)
 	ln, err := net.Listen("tcp", rpcAddr)
 	if err != nil {
 		return err
@@ -122,10 +119,14 @@ func (a *Agent) setupLog() error {
 		a.Config.ServerTLSConfig,
 		a.Config.PeerTLSConfig,
 	)
+	rpcAddr, err := a.Config.RPCAddr()
+	if err != nil {
+		return err
+	}
+	logConfig.Raft.BindAddr = rpcAddr
 	logConfig.Raft.LocalID = raft.ServerID(a.Config.NodeName)
 	logConfig.Raft.Bootstrap = a.Config.Bootstrap
 	logConfig.Raft.CommitTimeout = 1000 * time.Millisecond // nicewook. default 50 ms으로는 충분하지 않다.
-	var err error
 	a.log, err = log.NewDistributedLog(
 		a.Config.DataDir,
 		logConfig,
