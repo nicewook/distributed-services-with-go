@@ -1,4 +1,3 @@
-# START: begin
 CONFIG_PATH=${HOME}/.proglog/
 
 .PHONY: init
@@ -16,18 +15,16 @@ gencert:
 		-config=test/ca-config.json \
 		-profile=server \
 		test/server-csr.json | cfssljson -bare server
-# END: begin
 
-# START: client
+# 클라이언트 인증서
 	cfssl gencert \
 		-ca=ca.pem \
 		-ca-key=ca-key.pem \
 		-config=test/ca-config.json \
 		-profile=client \
 		test/client-csr.json | cfssljson -bare client
-# END: client
 
-# START: multi_client
+# 여러 클라이언트 인증서
 	cfssl gencert \
 		-ca=ca.pem \
 		-ca-key=ca-key.pem \
@@ -43,30 +40,22 @@ gencert:
 		-profile=client \
 		-cn="nobody" \
 		test/client-csr.json | cfssljson -bare nobody-client
-# END: multi_client
 
-# START: begin
 	mv *.pem *.csr ${CONFIG_PATH}
 
-# END: begin
-# START: auth
 $(CONFIG_PATH)/model.conf:
 	cp test/model.conf $(CONFIG_PATH)/model.conf
 
 $(CONFIG_PATH)/policy.csv:
 	cp test/policy.csv $(CONFIG_PATH)/policy.csv
 
-# START: begin
+# 테스트
 .PHONY: test
-# END: auth
 test:
-# END: begin
-# START: auth
 test: $(CONFIG_PATH)/policy.csv $(CONFIG_PATH)/model.conf
-#: START: begin
 	go test -race ./...
-# END: auth
 
+# protobuf 컴파일
 .PHONY: compile
 compile:
 	protoc api/v1/*.proto \
@@ -76,4 +65,8 @@ compile:
 		--go-grpc_opt=paths=source_relative \
 		--proto_path=.
 
-# END: begin
+# 도커 빌드
+TAG ?= 0.0.1
+
+build-docker:
+	docker build -t github.com/nicewook/proglog:$(TAG) .

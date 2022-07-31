@@ -93,3 +93,9 @@ mv ./kubectl ~/.local/bin/kubectl
 echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshenv
 source ~/.zshenv
 ```
+
+```
+go install sigs.k8s.io/kind@v0.12.0
+go get github.com/spf13/cobra
+go get github.com/spf13/viper
+```
