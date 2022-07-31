@@ -15,11 +15,10 @@ Install Go:
 ```zsh
 # root issue - so change it to ~
 wget https://github.com/protocolbuffers/protobuf/releases/download/v3.19.4/protoc-3.19.4-linux-x86_64.zip
-mkdir -p $HOME/.local/protobuf
-unzip protoc-3.19.4-linux-x86_64.zip -d $HOME/.local/protobuf
+unzip protoc-3.19.4-linux-x86_64.zip -d ~/.local/protobuf
 rm ./protoc-3.19.4-linux-x86_64.zip
-chmod +x $HOME/.local/protobuf/bin/protoc
 echo 'export PATH="$PATH:$HOME/.local/protobuf/bin"' >> ~/.zshenv
+source ~/.zshenv
 protoc --version
 ```
 
@@ -79,4 +78,18 @@ go get github.com/travisjeffery/go-dynaport@v1.0.0
 go get github.com/hashicorp/raft@v1.3.6
 go mod edit -replace github.com/hashicorp/raft-boltdb=github.com/travisjeffery/raft-boltdb@v1.0.0
 go get -u github.com/soheilhy/cmux
+```
+
+## Chapter 10
+
+kubectl 설치 및 실행할 수 있도록 설정. 
+2장에서와 마찬가지로 ~/.local에 설치함
+
+```
+curl -LO https://dl.k8s.io/release/v1.21.13/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshenv
+source ~/.zshenv
 ```
