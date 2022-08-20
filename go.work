@@ -1,10 +1,15 @@
 go 1.18
 
 use (
-	./dswg
 // ./ch1-LetsGo
 // ./ch2-StructureDataWithProtobuf
 // ./ch3-WriteALogPacakge
 // ./ch4-ServeRequestsWithgRPC
-
+// ./ch5-SecureYourServices
+// ./ch6-ObserveYourServices
+// ./ch7-ServerSideServiceDiscovery
+// ./ch8-CoordinateWithConsensus
+// ./ch9-ClientSideServiceDiscovery
+// ./ch10-DeployLocally
+// ./ch11-DeployCloud
 )
