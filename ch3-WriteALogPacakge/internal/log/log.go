@@ -60,8 +60,8 @@ func (l *Log) setup() error {
 		if err = l.newSegment(baseOffsets[i]); err != nil {
 			return err
 		}
-		// baseOffset contains dup for index and store so we skip
-		// the dup
+		// 베이스 오프셋은 index와 store 두 파일을 중복해서 담고 있기에
+		// 같은 값이 하나 더 있다. 그래서 한 번 건너뛴다. 
 		i++
 	}
 	if l.segments == nil {
