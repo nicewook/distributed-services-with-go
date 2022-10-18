@@ -64,7 +64,7 @@ func (s *segment) Append(record *api.Record) (offset uint64, err error) {
 		return 0, err
 	}
 	if err = s.index.Write(
-		// index offsets are relative to base offset
+		// 인덱스의 오프셋은 베이스 오프셋에서의 상댓값이다. 
 		uint32(s.nextOffset-uint64(s.baseOffset)),
 		pos,
 	); err != nil {
